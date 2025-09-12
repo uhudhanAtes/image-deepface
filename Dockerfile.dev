@@ -1,6 +1,6 @@
-FROM serengil/deepface:latest
+FROM tensorflow/tensorflow:2.14.0
 
-RUN apt-get update && apt-get install -y --no-install-recommends openssl procps python3 python3-pip && apt-get clean && \
+RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 libgl1-mesa-glx libsm6 libxext6 ffmpeg openssl && apt-get clean && rm -rf /var/lib/apt/lists/* && \
     mkdir -p /etc/ssl/private && openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /etc/ssl/private/key.pem -out /etc/ssl/private/cert.pem -subj "/C=TR/ST=KOCAELI/O=NovaVision AI/CN=novavision.ai"
 WORKDIR /opt/project
 COPY . /opt/project
